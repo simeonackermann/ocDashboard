@@ -124,7 +124,6 @@ class widget {
 	 * delete all hashs older than 1 day
 	 */
 	private function cleanHashs() {
-		//$sql = "DELETE FROM `*PREFIX*ocDashboard_usedHashs` WHERE `timestamp` < '".(time()-60*60*24)."'";
 		$sql = "DELETE FROM `*PREFIX*ocDashboard_usedHashs` WHERE `timestamp` < ?";
 		$query = \OCP\DB::prepare($sql);
 		$params = Array(time()-60*60*24);
@@ -184,9 +183,13 @@ class widget {
 	 */
 	private function checkConditions() {
 		if(isset($this->cond) && $this->cond != "") {
-			return \OCP\App::isEnabled($this->cond);
-		} else {
-			return true;
+			foreach(explode(",",$this->cond) as $cond) {
+				if(\OCP\App::isEnabled($cond) != 1) {
+					OCP\Util::writeLog('ocDashboard',"App ".$cond." missing for ".$this->name, \OCP\Util::WARN);
+					return false;
+				}
+			}
 		}
+		return true;
 	}
 }

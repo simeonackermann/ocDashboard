@@ -21,7 +21,7 @@ class widgets {
 		* 			label (normal text)
 		*		optional:
 		*			tooltip (shown by mouseover)
-		* 	cond condition App
+		* 	cond condition Apps (comma seperated)
 		* 	scripts comma separated (in folder js, without ".js")
 		* 	styles comma seperated (in folder css, without ".css")
 		* 	link (url for click on headline)
@@ -89,8 +89,8 @@ class widgets {
 									'name'		=>	"Newsreader",
 									'refresh'	=>	120,
 									'icon'		=>	"iconNews.png",	
-									'conf'		=>	'[{"name":"correct time (add x hours)","type":"string","id":"timezoneAdd","default":"0"},{"name":"Max age of news to show (hours)","type":"string","id":"maxAge"}]',
-									'cond' 		=>	"news",
+									'conf'		=>	'[{"name":"correct time (add x hours)","type":"string","id":"timezoneAdd","default":"0"},{"name":"Max age of news to show (hours)","type":"string","id":"maxAge","default":"0"}]',
+									'cond' 		=>	"news,appframework",
 									'scripts'	=>	"",
 									'styles'	=>	"",
 									'link'		=>	"index.php/apps/news/"

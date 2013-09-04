@@ -26,8 +26,8 @@
 					}
 					
 					switch ($c['type']) {
-						case 'string':					
-							$value = ($c['value'] != "")?$c['value']:$c['default'];
+						case 'string':				
+							$value = (isset($c['value']) && $c['value'] != "")?$c['value']:$c['default'];
 							echo '<label for="ocDashboard_'.$id.'_'.$c['id'].'" class="'.$classTooltipLabel.'">'.$l->t($c['name']);
 							echo $span;
 							echo '</label>';

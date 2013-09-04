@@ -76,36 +76,40 @@ class mailcheck extends widget implements interfaceWidget {
 		$ssl = (OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_ssl")=='0')? 1: 0;
 		$protocol = (OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_protocol")==1)? "POP3": "IMAP";
 		
-		if($ssl) {
-			$sslAdd = "/ssl";
-		} else {
-			$sslAdd = "";
-		}
-		
-		if($protocol=='IMAP') {
-			if($port=='') {
-				$port='143';
+		if($server != "" && $user != "" && $password != "") {
+			if($ssl) {
+				$sslAdd = "/ssl";
+			} else {
+				$sslAdd = "";
 			}
-			$strConnect='{'.$server.':'.$port.$sslAdd.'}'.$folder;
-		} else {
-			$strConnect='{'.$server.':'.$port.'/pop3'.$sslAdd.'}'.$folder;
-		}
-		
-		// connect and get mails
-		$mailbox = @imap_open($strConnect, $user, $password);
-		
-		if($mailbox) {
-			$mails = array_reverse(imap_fetch_overview($mailbox,"1:*", FT_UID)); // fetch a overview about mails
-			imap_close($mailbox);
-		
-			foreach($mails as $mail) {
-				if($mail->seen == 0 && $mail->deleted == 0) {
-					$this->newMails[] = $mail;
+			
+			if($protocol=='IMAP') {
+				if($port=='') {
+					$port='143';
 				}
+				$strConnect='{'.$server.':'.$port.$sslAdd.'}'.$folder;
+			} else {
+				$strConnect='{'.$server.':'.$port.'/pop3'.$sslAdd.'}'.$folder;
+			}
+			
+			// connect and get mails
+			$mailbox = @imap_open($strConnect, $user, $password);
+			
+			if($mailbox) {
+				$mails = array_reverse(imap_fetch_overview($mailbox,"1:*", FT_UID)); // fetch a overview about mails
+				imap_close($mailbox);
+			
+				foreach($mails as $mail) {
+					if($mail->seen == 0 && $mail->deleted == 0) {
+						$this->newMails[] = $mail;
+					}
+				}
+			} else {
+				OCP\Util::writeLog("ocDashboard",$strConnect,OCP\Util::DEBUG);
+				$this->error = $this->l->t("Connection error. <br />Are the settings correct?");
 			}
 		} else {
-			OCP\Util::writeLog("ocDashboard",$strConnect,OCP\Util::DEBUG);
-			$this->error = $this->l->t("Connection error. <br />Are the settings correct?");
+			$this->errorMsg = "Missing settings.";				
 		}
 	}
 	
