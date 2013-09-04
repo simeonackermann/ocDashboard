@@ -50,8 +50,13 @@ class widget {
 	public function getData() {
 		if($this->checkConditions()) {
 			$return = $this->getWidgetData();
-			$this->loadScripts();
-			$this->loadStyles();
+			if($this->errorMsg != "") {
+				$return = Array("error"=>$this->errorMsg);
+				$this->status = 3;
+			} else {
+				$this->loadScripts();
+				$this->loadStyles();
+			}
 		} else {
 			$return = Array("error"=>"Missing required app.");
 			$this->status = 4;

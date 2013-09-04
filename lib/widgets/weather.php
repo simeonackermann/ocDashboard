@@ -13,10 +13,10 @@
  * @author Florian Steffens (flost@live.no)
  */
 class weather extends widget implements interfaceWidget {
-	private $cityUrl = "http://weather.yahooapis.com/forecastrss?u=###unit###&w=###code###";
+	private $cityUrl = "http://weather.yahooapis.com/forecastrss?w=###code###&amp;u=###unit###";
 	private $luftdruckZeichen = Array("&rarr;","&uarr;","&darr;");
 	private $xml;
-	private $yUrl = "http://l.yimg.com/a/i/us/we/52/?.gif";
+	private $imageUrl = "http://l.yimg.com/a/i/us/we/52/?.gif";
 	
 	// ======== INTERFACE METHODS ================================
 	
@@ -63,6 +63,7 @@ class weather extends widget implements interfaceWidget {
 	 * loads the xml file from yahoo with the weather informations
 	 */
 	private function getXml() {
+	
 		$code = "";
 		$code = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_weather_city");
 		if (!isset($code) || $code == "" || !is_numeric($code)) {
@@ -77,10 +78,15 @@ class weather extends widget implements interfaceWidget {
 			$url = $this->cityUrl;
 			$url = str_replace("###unit###", $unit, $url);
 			$url = str_replace("###code###", $code, $url);
-			
-			$con = file_get_contents($url);
-			$this->xml = new SimpleXMLElement($con);
-			return true;
+			$con = @file_get_contents($url);
+	
+			if($con != "" && strlen($con) > 500) {
+				$this->xml = new SimpleXMLElement($con);
+				return true;
+			} else {
+				$this->errorMsg = "The city code is not valid.";
+				return false;
+			}
 		}
 	}	
 	
@@ -237,7 +243,7 @@ class weather extends widget implements interfaceWidget {
 	 * @return url to weather icon
 	 */
 	private function getImageUrl($code) {
-		return str_replace("?", $code, "http://l.yimg.com/a/i/us/we/52/?.gif");
+		return str_replace("?", $code, $this->imageUrl);
 	}
 		
 }
