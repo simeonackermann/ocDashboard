@@ -84,6 +84,7 @@ class weather extends widget implements interfaceWidget {
 				$this->xml = new SimpleXMLElement($con);
 				return true;
 			} else {
+				OCP\Util::writeLog('ocDashboard',"WeatherUrl: ".$url, \OCP\Util::WARN);
 				$this->errorMsg = "The city code is not valid.";
 				return false;
 			}
