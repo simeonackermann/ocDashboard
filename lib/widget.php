@@ -121,14 +121,16 @@ class widget {
 	
 	
 	/*
-	 * delete all hashs older than 1 day
+	 * delete all hashs older than 24 hours
 	 */
 	private function cleanHashs() {
-		$sql = "DELETE FROM `*PREFIX*ocDashboard_usedHashs` WHERE `timestamp` < ?";
+		$sql = 'DELETE FROM `*PREFIX*ocDashboard_usedHashs` WHERE `user` = ? AND `timestamp` < ?;';
 		$query = \OCP\DB::prepare($sql);
-		$params = Array(time()-60*60*24);
-		if(!$query->execute($params)) {
+		$params = Array($this->user, time()-60*60*24);
+		$result = $query->execute($params);
+		if(!$result) {
 			OCP\Util::writeLog('ocDashboard',"Can't delete usedHashs", \OCP\Util::WARN);
+			OCP\Util::writeLog('ocDashboard',$sql.json_encode($params), \OCP\Util::WARN);
 		}
 	}
 	
@@ -155,7 +157,6 @@ class widget {
 			$query2 = \OCP\DB::prepare($sql2);
 			$result2 = $query2->execute($params);
 			if($this->status < 3) {
-				$this->status = 2;
 				OCP\Util::writeLog('ocDashboard',"Could not write hash to db.", \OCP\Util::WARN);
 			}
 		}
