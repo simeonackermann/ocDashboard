@@ -174,8 +174,8 @@ class calendar extends widget implements interfaceWidget {
 	
 
 	/*
-	 * @param $timestamp, for looking for birthdays for this day
-	 * @return Array of all birthdays for timestamp
+	 * @param $timestamp, looking for birthdays for this day
+	 * @return Array of all birthdays for day of timestamp
 	 */
 	private function getBirthdays($timestamp,$lookForward=false) {
 		$births = Array();
@@ -223,7 +223,7 @@ class calendar extends widget implements interfaceWidget {
 			}			
 		} else {
 			// look for birthdays at the timestamp		
-			$day = date("Y-m-d",$timestamp);
+			$day = date("m-d",$timestamp);
 			$sql = "SELECT
 					value
 				FROM
@@ -235,12 +235,13 @@ class calendar extends widget implements interfaceWidget {
 						FROM
 							`*PREFIX*contacts_cards_properties`
 						WHERE
-							value IN (?)
+							value LIKE ? AND
+							name = ?
 						)
 				AND
 					name = 'FN'
 				;";
-			$params = Array($day);
+			$params = Array("%".$day,"BDAY");
 			$query = \OCP\DB::prepare($sql);
 			$result = $query->execute($params);
 			if (\OCP\DB::isError($result)) {
