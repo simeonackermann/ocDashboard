@@ -14,12 +14,28 @@ if(isset($additionalparams['fav']) && $additionalparams['fav'] != "") {
 	$style = "";
 }
 ?>
-
-	<div class='ocDashboard newsreader items'><h2 style="<?php print_unescaped($style); ?>"><a target='_blank' href="<?php print_unescaped($additionalparams["url"]); ?>"><?php p($additionalparams['headline']); ?></a></h2>
-
+	
+	<div class='ocDashboard newsreader items'>
+	
+<?php 
+if(isset($additionalparams['headline']) && $additionalparams['headline'] != "") {
+?>
+		<h2 style="<?php print_unescaped($style); ?>">
+		<?php 
+		if(isset($additionalparams["url"]) && $additionalparams["url"] != "") {
+		?>
+			<a target='_blank' href="<?php print_unescaped($additionalparams["url"]); ?>"><?php p($additionalparams['headline']); ?></a>
+		<?php 
+		} else {
+			p($additionalparams['headline']);
+		}
+		?>
+		</h2>
 <?php
+}
+
 // show date only if there are news
-if ($additionalparams['headline'] != "") {
+if (isset($additionalparams['headline']) && $additionalparams['headline'] != "" && isset($additionalparams['pubdate']) && $additionalparams['pubdate'] != "") {
 	if(OC_L10N::findLanguage() == "de" || OC_L10N::findLanguage() == "de_DE") { ?>
 	
 		<div class='ocDashboard newsreader date'><?php p(date("d.m.y", $additionalparams['pubdate'])); ?> - <?php print_unescaped(date("G:i", $additionalparams['pubdate'])); ?> Uhr</div>
@@ -31,5 +47,11 @@ if ($additionalparams['headline'] != "") {
 	<?php }
 } ?>
  
-	<div class='newsItem'><?php print_unescaped($additionalparams['content']); ?></div>
+	<div class='newsItem'>
+		<?php 
+		if(isset($additionalparams['content']) && $additionalparams['content'] != "") {
+			print_unescaped($additionalparams['content']);
+		}
+		 ?>
+	</div>
 </div>

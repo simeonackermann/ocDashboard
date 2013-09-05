@@ -204,6 +204,10 @@ class calendar extends widget implements interfaceWidget {
 				$params = Array($day);
 				$query = \OCP\DB::prepare($sql);
 				$result = $query->execute($params);
+				if (\OCP\DB::isError($result)) {
+					$this->errorMsg = "SQL Error";
+					\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+				}
 					
 				while($row = $result->fetchRow()) {
 					$births[] = Array(
@@ -239,6 +243,10 @@ class calendar extends widget implements interfaceWidget {
 			$params = Array($day);
 			$query = \OCP\DB::prepare($sql);
 			$result = $query->execute($params);
+			if (\OCP\DB::isError($result)) {
+				$this->errorMsg = "SQL Error";
+				\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+			}
 			
 			while($row = $result->fetchRow()) {
 				$births[] = Array(
@@ -290,6 +298,10 @@ class calendar extends widget implements interfaceWidget {
 		$params = Array($this->user);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params);
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
 	
 		while($row = $result->fetchRow()) {
 			// with timezone

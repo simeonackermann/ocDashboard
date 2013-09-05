@@ -128,9 +128,10 @@ class widget {
 		$query = \OCP\DB::prepare($sql);
 		$params = Array($this->user, time()-60*60*24);
 		$result = $query->execute($params);
-		if(!$result) {
-			OCP\Util::writeLog('ocDashboard',"Can't delete usedHashs", \OCP\Util::WARN);
-			OCP\Util::writeLog('ocDashboard',$sql.json_encode($params), \OCP\Util::WARN);
+			
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
 		}
 	}
 	
@@ -149,6 +150,10 @@ class widget {
 		$params = Array($hash,$this->id,$this->user);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params)->fetchRow();
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
 				
 		// if not in DB, write to DB
 		if(!$result) {
@@ -156,6 +161,11 @@ class widget {
 			$params = Array($hash,$this->id,$this->user,time());
 			$query2 = \OCP\DB::prepare($sql2);
 			$result2 = $query2->execute($params);
+			if (\OCP\DB::isError($result2)) {
+				$this->errorMsg = "SQL Error";
+				\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+			}
+				
 			if($this->status < 3) {
 				OCP\Util::writeLog('ocDashboard',"Could not write hash to db.", \OCP\Util::WARN);
 			}

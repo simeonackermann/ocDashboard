@@ -37,7 +37,11 @@ class tasks extends widget implements interfaceWidget {
 		$params = Array($id);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params)->fetchRow();
-
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
+		
 		// is there already an value about PERCENT-COMPLETE
 		$isAlreadyPrepared = false;
 		foreach (explode("\n", $result['calendardata']) as $d) {
@@ -73,7 +77,11 @@ class tasks extends widget implements interfaceWidget {
 		$params = Array($tmp,$id);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params);
-
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
+		
 		if($result) {
 			return true;
 		} else {
@@ -93,7 +101,11 @@ class tasks extends widget implements interfaceWidget {
 
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($args);
-	
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
+		
 		while($row = $result->fetchRow()) {
 			$task = Array();
 	

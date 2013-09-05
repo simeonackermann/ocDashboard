@@ -44,7 +44,11 @@ class newsreader extends widget implements interfaceWidget {
 		$params = Array($id);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params);
-
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
+		
 		if($result) {
 			return true;
 		} else {
@@ -78,7 +82,11 @@ class newsreader extends widget implements interfaceWidget {
 		$params = Array($oldestAcceptedNews,$this->user);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params);
-				
+		if (\OCP\DB::isError($result)) {
+			$this->errorMsg = "SQL Error";
+			\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		}
+		
 		$foundLastId = false;
 		$n = 0;
 		$news = Array();
@@ -114,7 +122,10 @@ class newsreader extends widget implements interfaceWidget {
 		$news['num'] = $n; 
 		$this->news = $news;
 		
-		OCP\Config::setUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_lastItemId", $news['id']);
+		// set last news id only if exist
+		if(isset($news['id']) && $news['id'] != "") {
+			OCP\Config::setUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_lastItemId", $news['id']);
+		}
 	}
 			
 }

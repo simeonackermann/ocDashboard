@@ -21,10 +21,8 @@ if (OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$id) == "yes")
 	$tmp = explode('###?###', $widgetHtml);
 	$html = $tmp[1];
 	
+	$RESPONSE['data'] = "";
 	if($html) {
-		foreach ($widgetData as $d) {
-			$RESPONSE['data'] .= $d."\n";
-		}
 		$RESPONSE["success"] = true;
 		$RESPONSE["HTML"] = $html;
 	} else {
