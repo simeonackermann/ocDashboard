@@ -9,14 +9,15 @@ class widgets {
 		* 	auto refresh every x seconds (0=no refresh)
 		* 	icon id (in img folder; always start with 'icon')
 		* 	conf options as json
-		* 		generel:
+		* 		generell:
 		* 			id (unique)
 		* 			name (description)
-		* 			default (for name)
+		* 			default (for radiooptions use numeric index)
 		* 			type (look at fields) 
 		* 		fields: 
 		* 			string recommendet: id, name, default
 		* 			radio  recommendet: options (as array)
+		* 				option recommendet: id, name
 		* 			password
 		* 			label (normal text)
 		*		optional:
@@ -56,7 +57,7 @@ class widgets {
 									'name'		=>	"Weather",
 									'refresh'	=>	3600,
 									'icon'		=>	"icons/165.png",	
-									'conf'		=>	'[{"name":"City Code","type":"string","id":"city","default":"656958","tooltip":"You can get the code for your city here: <a href=\"http://weather.yahoo.com\" target=\"_blank\">http://weather.yahoo.com/</a><br />Look for your city and open the weather information for it.<br />Look at the URL. It should end like /city-xxxxxx/.<br />Type in here the City Code \"xxxxxx\"."},{"id":"unit","type":"radio","options":["&deg;F / mph","&deg;C / kmh"],"name":"Unit"}]',
+									'conf'		=>	'[{"name":"City Code","type":"string","id":"city","default":"xxxxxx","tooltip":"You can get the code for your city here: <a href=\"http://weather.yahoo.com\" target=\"_blank\">http://weather.yahoo.com/</a><br />Look for your city and open the weather information for it.<br />Look at the URL. It should end like /city-xxxxxx/.<br />Type in here the City Code \"xxxxxx\"."},{"id":"unit","type":"radio","options":[{"id":"f","name":"&deg;F / mph"},{"id":"c","name":"&deg;C / kmh"}],"name":"Unit","default":"f"}]',
 									'cond' 		=>	"",
 									'scripts'	=>	"",
 									'styles'	=>	"",
@@ -67,7 +68,7 @@ class widgets {
 									'name'		=>	"Tasks",
 									'refresh'	=>	60,
 									'icon'		=>	"icons/49.png",	
-									'conf'		=>	'[{"id":"sort","type":"radio","options":["new tasks first","old tasks first"],"name":"Sortierung"}]',
+									'conf'		=>	'[{"id":"sort","type":"radio","options":[{"id":"DESC","name":"new tasks first"},{"id":"ASC","name":"old tasks first"}],"name":"display order","default":"DESC"}]',
 									'cond' 		=>	"tasks",
 									'scripts'	=>	"",
 									'styles'	=>	"",
@@ -78,7 +79,7 @@ class widgets {
 									'name'		=>	"Mail Check",
 									'refresh'	=>	120,
 									'icon'		=>	"icons/35.png",	
-									'conf'		=>	'[{"name":"E-Mail","type":"string","id":"mail","default":"name@domain.tld"},{"name":"Server","type":"string","id":"server","default":"imap.server.tld"},{"name":"User","type":"string","id":"user","default":"Username"},{"name":"Password","type":"password","id":"password","default":""},{"name":"Port","type":"string","id":"port","default":"143"},{"name":"Folder","type":"string","id":"folder","default":"INBOX"},{"id":"ssl","type":"radio","options":["Yes","No"],"name":"Use SSL","value":"0"},{"id":"protocol","type":"radio","options":["IMAP","POP3"],"name":"Protocol","value":"0"}]',
+									'conf'		=>	'[{"name":"E-Mail","type":"string","id":"mail","default":"name@domain.tld"},{"name":"Server","type":"string","id":"server","default":"imap.server.tld"},{"name":"User","type":"string","id":"user","default":"Username"},{"name":"Password","type":"password","id":"password","default":""},{"name":"Port","type":"string","id":"port","default":"143"},{"name":"Folder","type":"string","id":"folder","default":"INBOX"},{"id":"ssl","type":"radio","options":[{"id":"yes","name":"Yes"},{"id":"no","name":"No"}],"name":"Use SSL","default":"no"},{"id":"protocol","type":"radio","options":[{"id":"imap","name":"IMAP"},{"id":"pop3","name":"POP3"}],"name":"Protocol","default":"imap"}]',
 									'cond' 		=>	"",
 									'scripts'	=>	"",
 									'styles'	=>	"",
@@ -89,7 +90,7 @@ class widgets {
 									'name'		=>	"Newsreader",
 									'refresh'	=>	120,
 									'icon'		=>	"icons/98.png",	
-									'conf'		=>	'[{"name":"correct time (add x hours)","type":"string","id":"timezoneAdd","default":"0"},{"name":"Max age of news to show (hours)","type":"string","id":"maxAge","default":"0"}]',
+									'conf'		=>	'[{"name":"correct time (add x hours)","type":"string","id":"timezoneAdd","default":"0"},{"name":"Max age of news to show (hours)","type":"string","id":"maxAge","default":"2"}]',
 									'cond' 		=>	"news,appframework",
 									'scripts'	=>	"",
 									'styles'	=>	"",

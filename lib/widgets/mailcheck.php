@@ -142,6 +142,7 @@ class mailcheck extends widget implements interfaceWidget {
 	 * @return decode mail head information
 	 */
 	private function isodecode($text){
+		$rslt = "";
 		$elements = imap_mime_header_decode($text);
 		for ($i=0; $i<count($elements); $i++) {
 			$rslt .= $elements[$i]->text;

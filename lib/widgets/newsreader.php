@@ -61,10 +61,10 @@ class newsreader extends widget implements interfaceWidget {
 	 * get the next news from DB and safe it local in object
 	 */
 	private function getNextNews() {
-		$lastId = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_lastItemId");
+		$lastId = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_lastItemId",0);
 		$lastId = is_numeric($lastId) ? $lastId : 0;
 
-		$maxAgeNews = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_maxAge");
+		$maxAgeNews = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_newsreader_maxAge",$this->getDefaultValue("maxAge"));
 		$maxAgeNews = is_numeric($maxAgeNews) ? $maxAgeNews : 0;
 		$maxAgeNews = $maxAgeNews * 60 * 60; // from hours to seconds
 		$timezoneadd = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_calendar_timezoneAdd",0);

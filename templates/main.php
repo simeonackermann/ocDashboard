@@ -22,7 +22,7 @@
 		<div class="dashboardItem" id="<?php print_unescaped($widget['id']); ?>" style="display: none; <?php print_unescaped($style); ?>"  data-interval="<?php print_unescaped($widget['interval']); ?>" data-status="<?php print_unescaped($widget['status']); ?>">
 		
 		<!--  add wait symbol -->
-		<div class="ocDashboard inAction <?php print_unescaped($widget['id']); ?>">&nbsp;</div>
+		<div class="ocDashboard inAction <?php print_unescaped($widget['id']); ?>" style="display: none;">&nbsp;</div>
 
 		<?php 
 		// add reload button

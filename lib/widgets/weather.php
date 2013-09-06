@@ -13,7 +13,7 @@
  * @author Florian Steffens (flost@live.no)
  */
 class weather extends widget implements interfaceWidget {
-	private $cityUrl = "http://weather.yahooapis.com/forecastrss?w=###code###&amp;u=###unit###";
+	private $cityUrl = "http://weather.yahooapis.com/forecastrss?w=###code###&u=###unit###";
 	private $luftdruckZeichen = Array("&rarr;","&uarr;","&darr;");
 	private $xml;
 	private $imageUrl = "http://l.yimg.com/a/i/us/we/52/?.gif";
@@ -70,11 +70,8 @@ class weather extends widget implements interfaceWidget {
 			$this->errorMsg = "The city code is not valid.";
 			return false;
 		} else {
-			$units = Array("f","c");
-			$unit = "";
 			$unit = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_weather_unit",$this->getDefaultValue('unit'));
-			$unit = $units[$unit];
-	
+			
 			$url = $this->cityUrl;
 			$url = str_replace("###unit###", $unit, $url);
 			$url = str_replace("###code###", $code, $url);

@@ -20,7 +20,7 @@ foreach (widgets::$widgets as $widget) {
 	if(isset($confs) && !empty($confs)) {
 		foreach ($confs as $k => $config) {
 			if( $config['type'] != 'password') {
-				$confs[$k]['value'] = OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$widget['id']."_".$config['id']);
+				$confs[$k]['value'] = OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$widget['id']."_".$config['id'],"");
 			}
 		}
 	}				

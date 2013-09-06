@@ -26,20 +26,23 @@
 					}
 					
 					switch ($c['type']) {
-						case 'string':				
-							$value = (isset($c['value']) && $c['value'] != "")?$c['value']:$c['default'];
+						case 'string':
+							$default = (isset($c['default']))?$c['default']:"";
+							$value = (isset($c['value'])) ? $c['value']: "";
 							echo '<label for="ocDashboard_'.$id.'_'.$c['id'].'" class="'.$classTooltipLabel.'">'.$l->t($c['name']);
 							echo $span;
 							echo '</label>';
-							echo '<input type="text" value placeholder="'.$l->t($value).'" name="ocDashboard_'.$id.'_'.$c['id'].'" id="ocDashboard_'.$id.'_'.$c['id'].'" />';
+							echo '<input type="text" value="'.$value.'" placeholder="'.$l->t($default).'" name="ocDashboard_'.$id.'_'.$c['id'].'" id="ocDashboard_'.$id.'_'.$c['id'].'" />';
 							break;
 						case 'radio':
 							echo '<label class="'.$classTooltipLabel.'">&nbsp;&nbsp;'.$l->t($c['name']);
 							echo $span;
 							echo '</label>';
-							foreach ($c['options'] as $k => $option) {
-								($k == $c['value']) ? $checked = "checked": $checked = ""; // if this is actual choosen
-								echo '&nbsp;&nbsp;&nbsp;<input type="radio" id="ocDashboard_'.$id.'_'.$c['id'].'_'.$k.'" name="ocDashboard_'.$id.'_'.$c['id'].'" value="'.$k.'" class="ocDashboard_'.$id.'_'.$c['id'].'" '.$checked.' /><label for="ocDashboard_'.$id.'_'.$c['id'].'_'.$k.'">'.$l->t($option).'</label>';
+							foreach ($c['options'] as $option) {
+								$default = (isset($c['default'])) ? $c['default'] : ""; // fallback value
+								$value = (isset($c['value']) && $c['value'] != "") ? $c['value']: $default; // if value is set in db
+								$checked = ($option['id'] == $value) ?  "checked": ""; // if this is actual choosen
+								echo '&nbsp;&nbsp;&nbsp;<input type="radio" id="ocDashboard_'.$id.'_'.$c['id'].'_'.$option['id'].'" name="ocDashboard_'.$id.'_'.$c['id'].'" value="'.$option['id'].'" class="ocDashboard_'.$id.'_'.$c['id'].'" '.$checked.' /><label for="ocDashboard_'.$id.'_'.$c['id'].'_'.$option['id'].'">'.$l->t($option['name']).'</label>';
 							}
 							break;
 						case 'password':

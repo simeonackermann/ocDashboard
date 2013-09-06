@@ -94,9 +94,8 @@ class tasks extends widget implements interfaceWidget {
 	 * gets and holds all open tasks local
 	*/
 	private function getTasks () {
-		$sort = Array("DESC","ASC");
-		$sortValue = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_tasks_sort",0);
-		$sql = 'SELECT *, obj.id as tid FROM `*PREFIX*clndr_objects` as obj,`*PREFIX*clndr_calendars` as cal WHERE objecttype = ? AND NOT calendardata LIKE ? AND userid = ? AND cal.id = obj.calendarid ORDER BY lastmodified '.$sort[$sortValue].';';
+		$sortValue = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_tasks_sort",$this->getDefaultValue("sort"));
+		$sql = 'SELECT *, obj.id as tid FROM `*PREFIX*clndr_objects` as obj,`*PREFIX*clndr_calendars` as cal WHERE objecttype = ? AND NOT calendardata LIKE ? AND userid = ? AND cal.id = obj.calendarid ORDER BY lastmodified '.$sortValue.';';
 		$args = array("VTODO","%PERCENT-COMPLETE:100%",$this->user);
 
 		$query = \OCP\DB::prepare($sql);

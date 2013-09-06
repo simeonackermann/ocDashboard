@@ -180,11 +180,18 @@ class widget {
 	protected function getDefaultValue ($field) {
 		foreach ($this->conf as $conf) {
 			if($conf['id'] == $field) {
-				return $conf['default'];
-			} else {
-				return null;
+				if(isset($conf['options']) && isset($conf['default'])) {
+					foreach ($conf['options'] as $option) {
+						if($option['id'] == $conf['default']) {
+							return $option['id'];
+						}
+					}
+				} elseif(isset($conf['default'])) {
+					return $conf['default'];
+				}
 			}
 		}
+		return null;
 	}
 
 	
