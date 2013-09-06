@@ -11,7 +11,7 @@
 		} else {
 			
 			// birthday
-			if ($e['event']['type'] == "birthday") {
+			if (isset($e['event']['type']) && $e['event']['type'] == "birthday") {
 			?>
 				<div class="calendarItem birthday"><?php p($e['event']['title']); ?></div>
 				<div class="ocDashboard calendar date"><?php p($e['event']['date']); ?></div>
