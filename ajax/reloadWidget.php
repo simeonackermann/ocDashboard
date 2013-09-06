@@ -15,8 +15,9 @@ OC::$CLASSPATH['factory'] = 'ocDashboard/lib/factory.php';
 if (OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$id) == "yes") {
 	
 	$widgetData = factory::getWidget($widgetArray)->getData();
-	$tpl = new OCP\Template("ocDashboard", "singleWidget", "user");
-	$tpl->assign('widget', $widgetData);
+	$tpl = new OCP\Template("ocDashboard", "main", "user");
+	$tpl->assign('widgets', Array($widgetData));
+	$tpl->assign('singleOutput', true);
 	$widgetHtml = $tpl->fetchPage();
 	$tmp = explode('###?###', $widgetHtml);
 	$html = $tmp[1];

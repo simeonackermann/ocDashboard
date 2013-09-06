@@ -24,7 +24,7 @@ $(document).ready(function() {
 
 //set bg color for widgetItem
 function setBgShadowColor(id, status) {
-	colors = new Array("black","black","darkgreen","orange","red");
+	colors = new Array("black","black","darkgreen","#FF8000","red");
 	$('#' + id).css('-webkit-box-shadow','0px 5px 15px -7px ' + colors[status]);
 	$('#' + id).css('-moz-box-shadow','0px 5px 15px -7px ' + colors[status]);
 	$('#' + id).css('box-shadow','0px 5px 15px -7px ' + colors[status]);
