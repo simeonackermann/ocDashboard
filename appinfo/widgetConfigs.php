@@ -66,11 +66,11 @@ class widgets {
 							Array(
 									'id' 		=>	"tasks",
 									'name'		=>	"Tasks",
-									'refresh'	=>	60,
+									'refresh'	=>	0,
 									'icon'		=>	"icons/49.png",	
 									'conf'		=>	'[{"id":"sort","type":"radio","options":[{"id":"DESC","name":"new tasks first"},{"id":"ASC","name":"old tasks first"}],"name":"display order","default":"DESC"}]',
 									'cond' 		=>	"tasks",
-									'scripts'	=>	"",
+									'scripts'	=>	"tasks",
 									'styles'	=>	"",
 									'link'		=>	"index.php/apps/tasks"
 								),

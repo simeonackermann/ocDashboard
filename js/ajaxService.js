@@ -7,8 +7,6 @@ function ajaxService (widget,method,value,callback) {
 			if(callback){
 				callback(result.response);
 			}
-		} else {
-			alert("Recieved Error");
 		}
 	},'json');
 }

@@ -14,7 +14,7 @@
 		?>
 		
 		<div class='ocDashboard tasks item' <?php print_unescaped($style); ?>>
-        	<a onclick="javascript:$(this).text('x&nbsp;');showWaitSymbol('<?php print_unescaped($additionalparams['id']); ?>');ajaxService('tasks','markAsDone','<?php print_unescaped($task['tid']); ?>',function(res) {loadWidget('tasks');});" href="#" title="<?php print_unescaped($l->t("Mark as done.")); ?>">&#10003;&nbsp;</a>
+        	<span id="task-<?php p($task['tid']); ?>">&#10003;&nbsp;</span>
         	<?php p($task['summary']); ?>
         </div>
     <?php 

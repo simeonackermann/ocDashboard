@@ -37,7 +37,7 @@ function bindReload(id) {
 }
 
 //load widget via ajax and set in html
-function loadWidget(id) {
+function loadWidget(id, callback) {
 	$.ajax({
 	    dataType: "json",
 	    url:  OC.filePath('ocDashboard', 'ajax', 'reloadWidget.php') + '?widget=' + id,
@@ -49,6 +49,9 @@ function loadWidget(id) {
 			    //set new status
 			    setBgShadowColor(id,$('#' + id).data('status'));
 			    bindReload(id);
+			    if(callback){
+					callback();
+				}
 			}
 			else {
 				setBgShadowColor(id,4);

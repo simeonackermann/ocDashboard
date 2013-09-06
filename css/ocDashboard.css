@@ -96,6 +96,11 @@
 	font-style: italic;
 }
 
+.ocDashboard.tasks.items span:hover {
+	color: black;
+	cursor: pointer;
+}
+
 .ocDashboard.weather.imgToday {
 	position: relative;
 left: 70px;
