@@ -140,12 +140,13 @@ top: -25px;
 	margin-left: 210px;
 }
 
-.ocDashboard.newsreader.counter a {
+.ocDashboard.newsreader.counter span {
 	color: gray;
 }
 
-.ocDashboard.newsreader.counter a:hover {
+.ocDashboard.newsreader.counter span:hover {
 	color: black;
+	cursor: pointer;
 }
 
 .ocDashboard.calendar.date {

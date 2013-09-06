@@ -2,7 +2,7 @@
 // add number of shown news and "mark as read" click
 if(isset($additionalparams['num']) && $additionalparams['num'] != "") { ?>
 	 
-	 <div class="ocDashboard newsreader counter"><?php p($additionalparams['actual'].'/'.$additionalparams['num']); ?> <a onclick="javascript:showWaitSymbol('newsreader'); ajaxService('newsreader','markAsRead','',function() {loadWidget('newsreader');});" href="#" title="<?php print_unescaped($l->t("Mark as read.")); ?>">&#10003;</a></div>
+	 <div class="ocDashboard newsreader counter"><?php p($additionalparams['actual'].'/'.$additionalparams['num']); ?> <span id="markNewsAsRead">&#10003;</span></div>
 
 <?php } ?>
 
