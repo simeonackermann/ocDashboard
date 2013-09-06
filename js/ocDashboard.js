@@ -33,7 +33,15 @@ function setBgShadowColor(id, status) {
 
 //bind click function to reload widget via ajax
 function bindReload(id) {
-    $('#' + id + ' .ocDashboard.head span').bind('click', function () {showWaitSymbol(id);loadWidget(id);});
+	// bind click events after ajaxreload again
+	if (id == 'tasks') {
+		callback = function () {bindMarkAsRead();} ;
+	} else if (id == 'newsreader') {
+		callback = function () {bindMarkNewsAsRead();} ;
+	} else {
+		callback = function () {;} ;
+	}
+    $('#' + id + ' .ocDashboard.head span').bind('click', function () {showWaitSymbol(id);loadWidget(id,callback);});
 }
 
 //load widget via ajax and set in html

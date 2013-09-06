@@ -57,7 +57,7 @@ class widgets {
 									'name'		=>	"Weather",
 									'refresh'	=>	3600,
 									'icon'		=>	"icons/165.png",	
-									'conf'		=>	'[{"name":"City Code","type":"string","id":"city","default":"xxxxxx","tooltip":"You can get the code for your city here: <a href=\"http://weather.yahoo.com\" target=\"_blank\">http://weather.yahoo.com/</a><br />Look for your city and open the weather information for it.<br />Look at the URL. It should end like /city-xxxxxx/.<br />Type in here the City Code \"xxxxxx\"."},{"id":"unit","type":"radio","options":[{"id":"f","name":"&deg;F / mph"},{"id":"c","name":"&deg;C / kmh"}],"name":"Unit","default":"f"}]',
+									'conf'		=>	'[{"name":"City Code","type":"string","id":"city","default":"xxxxxx","tooltip":"You can get the code for your city here: <a href=\"http://weather.yahoo.com\" target=\"_blank\">http://weather.yahoo.com/</a><br />Look for your city and open the weather information for it.<br />Look at the URL. It should end like /city-xxxxxx/.<br />Type in here the City Code \"xxxxxx\"."},{"id":"unit","type":"radio","options":[{"id":"f","name":"°F / mph"},{"id":"c","name":"°C / kmh"}],"name":"Unit","default":"f"}]',
 									'cond' 		=>	"",
 									'scripts'	=>	"",
 									'styles'	=>	"",
