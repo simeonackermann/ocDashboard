@@ -50,8 +50,12 @@
 				
 		<?php 
 		// if error, just show error message
-		if(isset($widget['error']) && $widget['error'] != "") {
-			print_unescaped($l->t($widget['error']));
+		if(isset($widget['error']) && $widget['error'] != "") { ?>
+			<div class='ocDashboard error'>
+				<?php print_unescaped($l->t($widget['error'])); ?>
+			</div>
+			
+			<?php 
 		} else {
 			print_unescaped($this->inc('/widgets/'.$widget['id'].'.inc', $widget));
 		} ?>
