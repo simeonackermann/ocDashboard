@@ -46,10 +46,10 @@ function loadWidget(id) {
 	    success: function(res) {
 			if (res.success) {
 				//alert(res.HTML);
-				$('#' + res.id).children().fadeOut("normal", function () {
+				$('#' + res.id).children().fadeOut("fast", function () {
 						$('#' + res.id).children().remove();
 						$('#' + res.id).append(res.HTML);
-		                $('#' + res.id).children().fadeIn("normal", function () {
+		                $('#' + res.id).children().fadeIn("fast", function () {
 		                		hideWaitSymbol(res.id);
 		                	});
 					});
