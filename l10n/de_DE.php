@@ -64,5 +64,6 @@ $TRANSLATIONS = array(
 "No"=>"Nein",
 "Dashboard Settings"=>"Dashboard Einstellungen",
 "Protocol"=>"Protokoll",
-"There are %d new mails..."=> "Insgesamt %d neue E-Mails..."
+"There are %d new mails..."=> "Insgesamt %d neue E-Mails...",
+		"display order" => "Anzeigereihenfolge"
 );

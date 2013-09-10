@@ -329,13 +329,6 @@ class calendar extends widget implements interfaceWidget {
 		$return = "";
 		$showTime = true;
 		
-		// if event ends next day 00:00h
-		// show event end day 
-		//if(date("H:i:s",$timestamp) == "00:00:00") {
-		//	$timestamp = $timestamp-1;
-		//	$showTime = false;
-		//}
-		
 		// add day name
 		$day = "";
 		if($dayName) {
