@@ -1,5 +1,4 @@
 <div id="ocDashboard">
-	<?php if(isset($_['singleOutput']) && $_['singleOutput']) { print_unescaped("###?###"); } ?>
 
 	<?php 
 	// base domain
@@ -18,8 +17,14 @@
 		} else {
 			$style = "";
 		} ?>
+
 		
 		<div class="dashboardItem" id="<?php print_unescaped($widget['id']); ?>" style="display: none; <?php print_unescaped($style); ?>"  data-interval="<?php print_unescaped($widget['interval']); ?>" data-status="<?php print_unescaped($widget['status']); ?>">
+		
+		<?php 
+			// for single widget output --------------------------------------------------------------------------
+			if(isset($_['singleOutput']) && $_['singleOutput']) { print_unescaped("###?###"); } 
+		?>
 		
 		<!--  add wait symbol -->
 		<div class="ocDashboard inAction <?php print_unescaped($widget['id']); ?>" style="display: none;">&nbsp;</div>
@@ -41,16 +46,24 @@
 			<div class="ocDashboard head"><?php print_unescaped($l->t($widget['name'])); ?><?php print_unescaped($reload); ?></div>
 		<?php 
 		}
-		
+		?>
+				
+		<?php 
 		// if error, just show error message
 		if(isset($widget['error']) && $widget['error'] != "") {
 			print_unescaped($l->t($widget['error']));
 		} else {
 			print_unescaped($this->inc('/widgets/'.$widget['id'].'.inc', $widget));
 		} ?>
+			
+		<?php 
+			// for single widget output ----------------------------------------------------------------------------
+			if(isset($_['singleOutput']) && $_['singleOutput']) { print_unescaped("###?###"); } 
+		?>
+		
 		</div>
+		
 	<?php 
 	} ?>
 	
-	<?php if(isset($_['singleOutput']) && $_['singleOutput']) { print_unescaped("###?###"); } ?>
 </div>

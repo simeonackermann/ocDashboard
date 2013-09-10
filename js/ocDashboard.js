@@ -45,12 +45,17 @@ function loadWidget(id) {
 	    url:  OC.filePath('ocDashboard', 'ajax', 'reloadWidget.php') + '?widget=' + id,
 	    success: function(res) {
 			if (res.success) {
-				// replace widget html
-				$('#' + res.id).fadeOut();
-				$('#' + res.id).replaceWith(res.HTML);
-				$('#' + res.id).fadeIn("slow");
+				//alert(res.HTML);
+				$('#' + res.id).children().fadeOut("normal", function () {
+						$('#' + res.id).children().remove();
+						$('#' + res.id).append(res.HTML);
+		                $('#' + res.id).children().fadeIn("normal", function () {
+		                		hideWaitSymbol(res.id);
+		                	});
+					});
 
 				//set new status
+                $('#' + id).data('status',res.STATUS);
 			    setBgShadowColor(id,$('#' + id).data('status'));
 			}
 			else {

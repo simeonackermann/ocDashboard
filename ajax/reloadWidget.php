@@ -26,6 +26,7 @@ if (OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$id) == "yes")
 	if($html) {
 		$RESPONSE["success"] = true;
 		$RESPONSE["HTML"] = $html;
+		$RESPONSE['STATUS'] = $widgetData['status'];
 	} else {
 		$RESPONSE["success"] = false;
 	}
