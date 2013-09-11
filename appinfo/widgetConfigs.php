@@ -79,7 +79,7 @@ class widgets {
 									'name'		=>	"Mail Check",
 									'refresh'	=>	120,
 									'icon'		=>	"icons/35.png",	
-									'conf'		=>	'[{"name":"E-Mail","type":"string","id":"mail","default":"name@domain.tld"},{"name":"Server","type":"string","id":"server","default":"imap.server.tld"},{"name":"User","type":"string","id":"user","default":"Username"},{"name":"Password","type":"password","id":"password","default":""},{"name":"Port","type":"string","id":"port","default":"143"},{"name":"Folder","type":"string","id":"folder","default":"INBOX"},{"id":"ssl","type":"radio","options":[{"id":"yes","name":"Yes"},{"id":"no","name":"No"}],"name":"Use SSL","default":"no"},{"id":"protocol","type":"radio","options":[{"id":"imap","name":"IMAP"},{"id":"pop3","name":"POP3"}],"name":"Protocol","default":"imap"}]',
+									'conf'		=>	'[{"name":"Server","type":"string","id":"server","default":"imap.server.tld"},{"name":"User","type":"string","id":"user","default":"Username"},{"name":"Password","type":"password","id":"password","default":""},{"name":"Port","type":"string","id":"port","default":"143"},{"name":"Folder","type":"string","id":"folder","default":""},{"id":"ssl","type":"radio","options":[{"id":"yes","name":"Yes"},{"id":"no","name":"No"}],"name":"Use SSL","default":"no"},{"id":"protocol","type":"radio","options":[{"id":"imap","name":"IMAP"},{"id":"pop3","name":"POP3"}],"name":"Protocol","default":"imap"}]',
 									'cond' 		=>	"",
 									'scripts'	=>	"",
 									'styles'	=>	"",

@@ -150,10 +150,10 @@ class widget {
 		$params = Array($hash,$this->id,$this->user);
 		$query = \OCP\DB::prepare($sql);
 		$result = $query->execute($params)->fetchRow();
-		if (\OCP\DB::isError($result)) {
-				\OCP\Util::writeLog('ocDashboard',"Could not find hash in db.", \OCP\Util::WARN);
-				\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
-		}
+		//if (\OCP\DB::isError($result)) {
+		//		\OCP\Util::writeLog('ocDashboard',"Could not find hash in db.", \OCP\Util::WARN);
+		//		\OCP\Util::writeLog('ocDashboard', \OC_DB::getErrorMessage($result), \OC_Log::ERROR);
+		//}
 				
 		// if not in DB, write to DB
 		if(!$result) {

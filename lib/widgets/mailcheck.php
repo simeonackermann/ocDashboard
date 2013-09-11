@@ -67,34 +67,20 @@ class mailcheck extends widget implements interfaceWidget {
 	 */
 	private function getNewMails() {
 		$strConnect = "";
-		$mail = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_mail","");
 		$user = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_user","");
-		$server = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_server","");
-		$password = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_password","");
-		$port = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_port","");
-		$folder = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_folder","");
-		$ssl = (OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_ssl")=='0')? 1: 0;
-		$protocol = (OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_protocol")==1)? "POP3": "IMAP";
+		$host = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_server","");
+		$pass = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_password","");
+		$port = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_port",$this->getDefaultValue("port"));
+		$folder = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_folder",$this->getDefaultValue("folder"));
+		$security = (OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_ssl")=='yes')? "ssl": "none";
+		$protocol = OCP\Config::getUserValue($this->user, "ocDashboard", "ocDashboard_mailcheck_protocol",$this->getDefaultValue("protocol"));
 		
-		if($server != "" && $user != "" && $password != "") {
-			if($ssl) {
-				$sslAdd = "/ssl";
-			} else {
-				$sslAdd = "";
-			}
-			
-			if($protocol=='IMAP') {
-				if($port=='') {
-					$port='143';
-				}
-				$strConnect='{'.$server.':'.$port.$sslAdd.'}'.$folder;
-			} else {
-				$strConnect='{'.$server.':'.$port.'/pop3'.$sslAdd.'}'.$folder;
-			}
-			
-			// connect and get mails
-			$mailbox = @imap_open($strConnect, $user, $password);
-			
+		if($host != "" && $user != "" && $pass != "") {
+			// connect to mailbox
+			$connString = "{".$host.":".$port."/".$protocol.($security != "none" ? "/".$security."/novalidate-cert" : "")."}";
+			\OCP\Util::writeLog("ocDashboard",$connString,\OCP\Util::DEBUG);
+			$mailbox = imap_open($connString,$user,$pass);
+				
 			if($mailbox) {
 				$mails = array_reverse(imap_fetch_overview($mailbox,"1:*", FT_UID)); // fetch a overview about mails
 				imap_close($mailbox);
@@ -105,8 +91,8 @@ class mailcheck extends widget implements interfaceWidget {
 					}
 				}
 			} else {
-				OCP\Util::writeLog("ocDashboard",$strConnect,OCP\Util::DEBUG);
-				$this->error = $this->l->t("Connection error. <br />Are the settings correct?");
+				\OCP\Util::writeLog("ocDashboard",$connString,\OCP\Util::ERROR);
+				$this->error = "Connection error. <br />Are the settings correct?";
 			}
 		} else {
 			$this->errorMsg = "Missing settings.";				
