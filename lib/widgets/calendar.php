@@ -184,25 +184,26 @@ class calendar extends widget implements interfaceWidget {
 		if($lookForward) { 
 			for($i = 0; $i < 14; $i++) {
 				$newTimestamp = $timestamp+(24*60*60*$i);
-				$day = date("Y-m-d",$newTimestamp);
+				$day = date("m-d",$newTimestamp);
 				$sql = "SELECT
-					value
-				FROM
-					`*PREFIX*contacts_cards_properties`
-				WHERE
-					contactid IN
-						(SELECT
-							contactid
-						FROM
-							`*PREFIX*contacts_cards_properties`
-						WHERE
-							value IN (?)
-						)
-				AND
-					name = 'FN'
-				;";
-				$params = Array($day);
-				$query = \OCP\DB::prepare($sql);
+						value
+					FROM
+						`*PREFIX*contacts_cards_properties`
+					WHERE
+						contactid IN
+							(SELECT
+								contactid
+							FROM
+								`*PREFIX*contacts_cards_properties`
+							WHERE
+								value LIKE ? AND
+								name = ?
+							)
+					AND
+						name = 'FN'
+					;";
+			$params = Array("%".$day,"BDAY");
+			$query = \OCP\DB::prepare($sql);
 				$result = $query->execute($params);
 				if (\OCP\DB::isError($result)) {
 					$this->errorMsg = "SQL Error";
