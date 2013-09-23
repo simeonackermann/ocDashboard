@@ -28,6 +28,8 @@ foreach (widgets::$widgets as $widget) {
 	$w[] = Array( "widget" => $widget, "enable" => $enable, "conf" => $confs);
 }
 
+//print_r($w);
+
 $tmpl->assign('widgets', $w);
 
 return $tmpl->fetchPage();

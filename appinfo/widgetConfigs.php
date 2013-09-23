@@ -95,7 +95,18 @@ class widgets {
 									'scripts'	=>	"newsreader",
 									'styles'	=>	"",
 									'link'		=>	"index.php/apps/news/"
-								)
+								),
+							Array(
+									'id' 		=>	"tvprogram",
+									'name'		=>	"TV Program",
+									'refresh'	=>	0,
+									'icon'		=>	"icons/41.png",
+									'conf'		=>	'',
+									'cond' 		=>	"",
+									'scripts'	=>	"",
+									'styles'	=>	"",
+									'link'		=>	""
+							)	
 					  );
 		
 		/*

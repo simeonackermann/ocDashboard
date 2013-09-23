@@ -31,7 +31,7 @@
 
 		<?php 
 		// add reload button
-		if ($widget['interval']) {
+		if (isset($widget['interval']) && $widget['interval'] != "") {
 			$reload = "<span>&nbsp;&#8635;</span>";
 		} else {
 			$reload = "";

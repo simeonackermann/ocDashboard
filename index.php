@@ -14,7 +14,6 @@ $user = OCP\User::getUser();
 $w = Array();
 OC::$CLASSPATH['widgets'] = 'ocDashboard/appinfo/widgetConfigs.php';
 OC::$CLASSPATH['factory'] = 'ocDashboard/lib/factory.php';
-OC::$CLASSPATH['api'] = 'ocDashboard/lib/api.php';
 
 foreach (widgets::$widgets as $widget) {
 	// if widget is enabled
@@ -26,8 +25,12 @@ foreach (widgets::$widgets as $widget) {
 //if all deactivated
 if(empty($w)) {
 	$l=new OC_L10N('ocDashboard');
-	$w[0]['error'] = $l->t("You can configure this site in your personal settings.");
-	$w[0]['id'] = "";
+	$w[0]['error'] = "You can configure this site in your personal settings.";
+	$w[0]['id'] = "none";
+	$w[0]['name'] = "";
+	$w[0]['status'] = "3";
+	$w[0]['interval'] = "0";
+	$w[0]['icon'] = "";
 }
 
 $tpl = new OCP\Template("ocDashboard", "main", "user");
