@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
-.dashboardItem {
+/* generel WIDGETS ------------------------------------ */
+#ocDashboard .widget {
 	border: 0px rgb(230,230,230) solid;
 	float: left;
 	width: 300px;

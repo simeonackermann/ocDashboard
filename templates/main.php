@@ -1,21 +1,22 @@
 <div id="ocDashboard">
 
 <?php 
-
-	//print_r($_['widgets']);
 	
+	// go threw all activated widgets
 	foreach ( $_['widgets'] as $widget) {
-		// if error, just show error message
-		if(isset($widget['error']) && $widget['error'] != "") {
-		?>
-			
-			<div class="dashboardItem" id="<?php print_unescaped($widget['id']); ?>" style="display: none;"  data-interval="<?php print_unescaped($widget['interval']); ?>" data-status="<?php print_unescaped($widget['status']); ?>">
-			<div class="ocDashboard head"><?php print_unescaped($l->t($widget['name'])); ?></div>
-			<?php print_unescaped($l->t($widget['error'])); ?>
-			</div>
-			
-		<?php
-		} else {
+		
+		// show start screen
+		if($widget['id'] == "welcome") { 			
+			print_unescaped($this->inc('inc.welcome'));
+		}
+		
+		// if error exists, just show error message for this widget
+		elseif(isset($widget['error']) && $widget['error'] != "") {
+			print_unescaped($this->inc('inc.widgetError'));
+		} 
+		
+		// show widget
+		else {
 			// base domain
 			$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
 			$sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
@@ -25,12 +26,7 @@
 			$y = explode("index.php", $x);
 			$base = $y[0];
 			
-			// add icon if availible
-			if($widget['icon'] != "") {
-				$style = "background-image: url('".$base."apps/ocDashboard/img/".$widget['icon']."'); background-repeat: no-repeat; background-position: 280px 0px; background-size: 35px 35px;";
-			} else {
-				$style = "";
-			}
+			
 			?>
 			
 			<div class="dashboardItem" id="<?php print_unescaped($widget['id']); ?>" style="display: none; <?php print_unescaped($style); ?>"  data-interval="<?php print_unescaped($widget['interval']); ?>" data-status="<?php print_unescaped($widget['status']); ?>">

@@ -1,7 +1,7 @@
 <?php
 $l=new OC_L10N('ocDashboard');
 
-\OCP\App::registerPersonal( 'ocDashboard', 'settings' );
+//\OCP\App::registerPersonal( 'ocDashboard', 'settings' );
 
 \OCP\App::addNavigationEntry(array(
 
