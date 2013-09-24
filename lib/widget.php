@@ -13,7 +13,7 @@ class widget {
 	protected $name = "";
 	protected $l;
 	protected $user;
-	protected $conf;
+	protected $confArr;
 	protected $status;
 	protected $errorMsg;
 	protected $interval;
@@ -23,33 +23,26 @@ class widget {
 	protected $scripts;
 	protected $styles;
 	
-	function __construct($widgetConf) {
-		$this->id = $widgetConf['id'];
-		$this->name = $widgetConf['name'];
-		$this->l = OC_L10N::get('ocDashboard');
-		$this->user = OCP\User::getUser();
-		$this->conf = json_decode($widgetConf['conf'], true);
-		$this->status = 0;
-		$this->errorMsg = "";
-		$this->htmlHash = "";
-		$this->html = "";
-		$this->interval = $widgetConf['refresh']*1000; // in seconds
-		$this->icon = $widgetConf['icon'];
-		$this->link = $widgetConf['link'];
-		$this->cond = $widgetConf['cond'];
-		$this->scripts = $widgetConf['scripts'];
-		$this->styles = $widgetConf['styles'];
+	function __construct() {
 	}
 	
 	
 // --- PUBLIC ----------------------------------------
+	
+	public function getId() { return $this->id; }
+	public function getName() { return $this->name; }
+	public function getConfigurationArray() { return $this->confArr; }
+	public function getStatus() { return $this->status; }
+	public function getInterval() { return $this->interval; }
+	public function getIconPath() { return ($this->icon) ? "path".$this->icon: ""; }
+	
 	
 	/*
 	 * @return returns all data for the actual widget
 	 */
 	public function getData() {
 		if($this->checkConditions()) {
-			$return = $this->getWidgetData();
+			$widgetData = $this->getWidgetData();
 			$this->loadScripts();
 			$this->loadStyles();
 		} else {

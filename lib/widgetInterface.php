@@ -3,7 +3,7 @@
 /*
  * every widget has to implement this interface
  */
-interface interfaceWidget {
+interface widgetInterface {
 	
 // ------- INHERIT METHODS ------------------------------------------
 

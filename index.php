@@ -12,23 +12,21 @@ $user = OCP\User::getUser();
 $l=new OC_L10N('ocDashboard');
 
 //OC::$CLASSPATH['widgets'] = 'ocDashboard/appinfo/widgetConfigs.php';
-//OC::$CLASSPATH['factory'] = 'ocDashboard/lib/factory.php';
+OC::$CLASSPATH['factory'] = 'ocDashboard/lib/factory.php';
 //OC::$CLASSPATH['api'] = 'ocDashboard/lib/api.php';
 
-$widgets = Array();
-/*foreach (widgets::$widgets as $widget) {
-	// if widget is enabled
-	if (OCP\Config::getUserValue($user, "ocDashboard", "ocDashboard_".$widget['id']) == "yes") {
-		$w[] = factory::getWidget($widget)->getData();
-	}
-}*/
-
-//if all deactivated
-if(empty($widgets)) {
-	OCP\Util::addStyle('ocDashboard', 'ocDashboardWelcome');
-	$widgets[0]['id'] = "welcome";
+$widgetObjects = Array();
+foreach (factory::getEnabledWidgetIds($user) as $widgetId) {
+	$widgetObjects[] = factory::getWidgetObject($widgetId);
 }
 
 $tpl = new OCP\Template("ocDashboard", "main", "user");
 $tpl->assign('widgets', $widgets);
+
+//if all deactivated
+if(empty($widgetObjects)) {
+	OCP\Util::addStyle('ocDashboard', 'ocDashboardWelcome');
+	$tpl->assign('welcome',1);
+}
+
 $tpl->printPage();
