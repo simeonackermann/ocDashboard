@@ -95,7 +95,18 @@ class widgets {
 									'scripts'	=>	"newsreader",
 									'styles'	=>	"",
 									'link'		=>	"index.php/apps/news/"
-								)
+								),
+							Array(
+									'id' 		=>	"bookmarks",
+									'name'		=>	"Bookmarks",
+									'refresh'	=>	360,
+									'icon'		=>	"icons/83.png",	
+									'conf'		=>	'[{"name":"Tags (comma seperated)","type":"string","id":"tags","default":"dashboard"}]',
+									'cond' 		=>	"bookmarks",
+									'scripts'	=>	"",
+									'styles'	=>	"",
+									'link'		=>	"index.php/apps/bookmarks"
+								),
 					  );
 		
 		/*
